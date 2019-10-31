@@ -47,7 +47,7 @@ def handle_message(event):
             print(weather_date + ':' + weather_forecasts)
         reply_text = api_data["description"]["text"]
     else:
-        reply_text = push_text
+        reply_text = "ちゃんと地域入力しろやあほ"
 
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
