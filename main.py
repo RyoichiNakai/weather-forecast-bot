@@ -45,10 +45,9 @@ def handle_message(event):
         for weather in api_data['forecasts']:
             weather_date = weather['dateLabel']
             weather_forecasts = weather['telop']
-            print(weather_date + ':' + weather_forecasts)
-        reply_text = api_data["description"]["text"]
+        reply_text = weather_date + ':' + weather_forecasts
     else:
-        reply_text = "ちゃんと地域入力しろやあほ"
+        reply_text = "ちゃんと地域入力しろやあほ٩( ᐛ )و"
 
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
