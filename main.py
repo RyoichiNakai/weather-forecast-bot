@@ -3,6 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -34,7 +35,21 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
+    push_text = event.message.text
+
+    #リプライする文字列
+    if push_text == "天気":
+        url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'
+        api_data = requests.get(url).json()
+        for weather in api_data['forecasts']:
+            weather_date = weather['dateLabel']
+            weather_forecasts = weather['telop']
+            print(weather_date + ':' + weather_forecasts)
+        reply_text = api_data["description"]["text"]
+    else:
+        reply_text = push_text
+
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
 
 
 if __name__ == "__main__":
