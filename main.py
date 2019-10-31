@@ -41,6 +41,7 @@ def handle_message(event):
     if push_text == "天気":
         url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'
         api_data = requests.get(url).json()
+        print(api_data)
         for weather in api_data['forecasts']:
             weather_date = weather['dateLabel']
             weather_forecasts = weather['telop']
