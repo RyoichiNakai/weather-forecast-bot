@@ -16,7 +16,6 @@ class GetWeatherData:
         geocodes = get_coordinate.coordinate()
         LAT = geocodes[0]  # 緯度
         LON = geocodes[1]  # 経度
-        print(LAT, LON)
         # 指定した緯度と経度のクエリを叩く
         self.url = self.path.format(lat=LAT, lon=LON, id=self.key)
         # JSON形式でデータを取得
@@ -40,9 +39,9 @@ class GetWeatherData:
             if tomorrow.strftime("%m月%d日") == dt.strftime("%m月%d日"):
                 break
             else:
-                self.datelist.append(dt.strftime("%d日-%H時:"))
-            self.weatherlist.append(w['weather'][0]['description'] + ',')
-            self.temperaturelist.append(str(int(w['main']['temp'])) + '℃')
+                self.datelist.append(dt.strftime("%d日-%H時"))
+            self.weatherlist.append(w['weather'][0]['description'])
+            self.temperaturelist.append(int(w['main']['temp']))
             self.max_temperaturelist.append(w['main']['temp_max'])
             self.min_temperaturelist.append(w['main']['temp_min'])
             if 'rain' in w and '3h' in w['rain']:
@@ -67,11 +66,12 @@ class GetWeatherData:
         """
 
         self.get_weather()
-        r = ''
-        for i in range(len(self.datelist)):
-            r = r + str(self.datelist[i]) + str(self.weatherlist[i]) + str(self.temperaturelist[i]) + '\n'
+        weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
 
-        return r
+        result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
+        reply_text = ('{}\nの今日の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nです。')
+
+        return reply_text
 
 
 if __name__ == "__main__":
