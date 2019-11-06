@@ -69,7 +69,7 @@ class GetWeatherData:
         self.get_weather()
         r = ''
         for i in range(len(self.datelist)):
-            r = r + self.datelist[i] + self.weatherlist[i] + self.temperaturelist[i] + '\n'
+            r = r + str(self.datelist[i]) + str(self.weatherlist[i]) + str(self.temperaturelist[i]) + '\n'
 
         return r
 
