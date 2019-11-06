@@ -40,9 +40,9 @@ class GetWeatherData:
             if tomorrow.strftime("%m月%d日") == dt.strftime("%m月%d日"):
                 break
             else:
-                self.datelist.append(dt.strftime("%m月%d日-%H時"))
-            self.weatherlist.append(w['weather'][0]['description'])
-            self.temperaturelist.append(w['main']['temp'])
+                self.datelist.append(dt.strftime("%d日-%H時:"))
+            self.weatherlist.append(w['weather'][0]['description'] + ',')
+            self.temperaturelist.append(str(int(w['main']['temp'])) + '℃')
             self.max_temperaturelist.append(w['main']['temp_max'])
             self.min_temperaturelist.append(w['main']['temp_min'])
             if 'rain' in w and '3h' in w['rain']:
@@ -77,4 +77,5 @@ class GetWeatherData:
 if __name__ == "__main__":
     input_text = '大阪'
     r = GetWeatherData(input_text)
-    r.get_weather()
+    reply = r.show_weatherData()
+    print(reply)
