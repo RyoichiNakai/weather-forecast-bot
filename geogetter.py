@@ -21,7 +21,7 @@ class GetCoordinate:
         ['35.712056', '139.762775']
         """
 
-        soup = BeautifulSoup(self.html.text, "lxml")
+        soup = BeautifulSoup(self.html.text, "xml")
 
         if soup.find('error'):
             raise ValueError(f"Invalid address submitted.")
