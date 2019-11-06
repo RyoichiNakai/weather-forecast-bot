@@ -1,7 +1,7 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage
 import os
 from getweathedata import GetWeatherData
 
@@ -40,7 +40,17 @@ def handle_message(event):
     r = GetWeatherData(input_text)
     reply_text = r.show_weatherData()
 
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=reply_text))
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
+
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location(event):
+    input_text = event.message.address
+
+    r = GetWeatherData(input_text)
+    reply_text = r.show_weatherData()
+
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
 
 
 if __name__ == "__main__":
