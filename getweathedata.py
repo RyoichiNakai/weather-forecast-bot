@@ -9,21 +9,13 @@ class GetWeatherData:
     key = '59746276f46d246d79ecc6ca5130558e'
     path = 'http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=metric&lang=ja&APPID={id}'
 
-    def __init__(self, address):
+    def __init__(self, address, lat, lon):
+        # 指定した緯度と経度のクエリを叩く
         self.input_text = address
-        # geogetterから指定した地域の緯度と経度を取得
-        self.errorflag = 0
-        get_coordinate = GetCoordinate(self.input_text)
-        geocodes = get_coordinate.coordinate()
-        if geocodes != 1:
-            lat = geocodes[0]  # 緯度
-            lon = geocodes[1]  # 経度
-            # 指定した緯度と経度のクエリを叩く
-            self.url = self.path.format(lat=lat, lon=lon, id=self.key)
-            # JSON形式でデータを取得
-            self.response = requests.get(self.url).json()
-        else:
-            self.errorflag = 1
+        self.url = self.path.format(lat=lat, lon=lon, id=self.key)
+        # JSON形式でデータを取得
+        self.response = requests.get(self.url).json()
+
 
     def get_weather(self):
         cnt = 0
@@ -69,22 +61,19 @@ class GetWeatherData:
         :return:
         """
 
-        if self.errorflag == 0:
-            self.get_weather()
-            weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
+        self.get_weather()
+        weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
 
-            result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
-            reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nだよ^ ^')
+        result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
+        reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nだよ^ ^')
 
-            return reply_text
-
-        else:
-            reply_text = 'ちゃんと地域入力しろよあほ'
-            return reply_text
+        return reply_text
 
 
 if __name__ == "__main__":
-    input_text = '大阪'
-    r = GetWeatherData(input_text)
+    input_text = '大阪堺市北区'
+    lat = 0
+    lon = 0
+    r = GetWeatherData(input_text, lat, lon)
     reply = r.show_weatherData()
     print(reply)

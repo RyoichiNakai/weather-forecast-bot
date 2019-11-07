@@ -22,10 +22,14 @@ class GetCoordinate:
         """
 
         soup = BeautifulSoup(self.html.text, 'html.parser')
+        print(soup)
 
         if soup.find('error'):
             return 1
-            # raise ValueError(f"Invalid address submitted.")
+
+        if soup.find('needs_to_verify').string == 'no':
+            return 1
+
 
         # 緯度と経度を返す
         latitude = soup.find('lat').string

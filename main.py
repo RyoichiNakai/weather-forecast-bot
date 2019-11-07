@@ -4,6 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage
 import os
 from getweathedata import GetWeatherData
+from geogetter import GetCoordinate
 
 app = Flask(__name__)
 
@@ -36,9 +37,16 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     input_text = event.message.text
-
-    r = GetWeatherData(input_text)
-    reply_text = r.show_weatherData()
+    get_coordinate = GetCoordinate(input_text)
+    geocodes = get_coordinate.coordinate()
+    
+    if geocodes == 1:
+        reply_text = 'ちゃんと地域入力しろやあほ'
+    else:
+        lat = geocodes[0]  # 緯度
+        lon = geocodes[1]  # 経度
+        r = GetWeatherData(input_text, lat, lon)
+        reply_text = r.show_weatherData()
 
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_text))
 
