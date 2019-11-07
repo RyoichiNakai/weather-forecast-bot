@@ -24,7 +24,8 @@ class GetCoordinate:
         soup = BeautifulSoup(self.html.text, 'html.parser')
 
         if soup.find('error'):
-            raise ValueError(f"Invalid address submitted.")
+            return 1
+            # raise ValueError(f"Invalid address submitted.")
 
         # 緯度と経度を返す
         latitude = soup.find('lat').string

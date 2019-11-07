@@ -12,14 +12,18 @@ class GetWeatherData:
     def __init__(self, address):
         self.input_text = address
         # geogetterから指定した地域の緯度と経度を取得
+        self.errorflag = 0
         get_coordinate = GetCoordinate(self.input_text)
         geocodes = get_coordinate.coordinate()
-        LAT = geocodes[0]  # 緯度
-        LON = geocodes[1]  # 経度
-        # 指定した緯度と経度のクエリを叩く
-        self.url = self.path.format(lat=LAT, lon=LON, id=self.key)
-        # JSON形式でデータを取得
-        self.response = requests.get(self.url).json()
+        if geocodes != 1:
+            lat = geocodes[0]  # 緯度
+            lon = geocodes[1]  # 経度
+            # 指定した緯度と経度のクエリを叩く
+            self.url = self.path.format(lat=lat, lon=lon, id=self.key)
+            # JSON形式でデータを取得
+            self.response = requests.get(self.url).json()
+        else:
+            self.errorflag = 1
 
     def get_weather(self):
         cnt = 0
@@ -65,13 +69,18 @@ class GetWeatherData:
         :return:
         """
 
-        self.get_weather()
-        weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
+        if self.errorflag == 0:
+            self.get_weather()
+            weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
 
-        result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
-        reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nだよ^ ^')
+            result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
+            reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nだよ^ ^')
 
-        return reply_text
+            return reply_text
+
+        else:
+            reply_text = 'ちゃんと地域入力しろよあほ'
+            return reply_text
 
 
 if __name__ == "__main__":
