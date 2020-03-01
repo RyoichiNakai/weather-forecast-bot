@@ -30,7 +30,7 @@ class GetWeatherData:
         for w in self.response['list']:
             dt = timezone('Asia/Tokyo').localize(datetime.fromtimestamp(w['dt']))
             if cnt == 0:
-                tomorrow = dt + timedelta(days=3)
+                tomorrow = dt + timedelta(days=5)
                 cnt += 1
             if tomorrow.strftime("%m月%d日") == dt.strftime("%m月%d日"):
                 break
