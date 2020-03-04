@@ -41,7 +41,7 @@ def handle_message(event):
     geocodes = get_coordinate.coordinate()
     
     if geocodes == 1:
-        reply_text = 'ちゃんと地域入力しろやあほ'
+        reply_text = '都市名を入力してください'
     else:
         lat = geocodes[0]  # 緯度
         lon = geocodes[1]  # 経度

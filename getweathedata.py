@@ -65,7 +65,7 @@ class GetWeatherData:
         weather_info = [(self.datelist[i], self.weatherlist[i], self.temperaturelist[i]) for i in range(len(self.datelist))]
 
         result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(len(weather_info))]
-        reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result) + '\nだよ^ ^')
+        reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result))
 
         return reply_text
 
