@@ -42,5 +42,3 @@ $ git push heroku master
 
 * Name: Ryoichi Nakai
 * E-mail: elmobasketball0913@me.com
- 
-
