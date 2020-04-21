@@ -13,40 +13,34 @@ Refer to requirements.txt.
 * beautifulsoup4==4.8.1
  
 # Installation
- 
 ```bash
-pip install flask
-pip install line-bot-sdk
-
+$ pip install pytz
+$ pip install requests
+$ pip install Flask
+$ pip install line-bot-sdk
+$ pip install beautifulsoup4
 ```
  
 # Usage
- 
-DEMOの実行方法など、"hoge"の基本的な使い方を説明する
+If you use this repository, please Please install according to the following.
  
 ```bash
-git clone https://github.com/hoge/~
-cd examples
-python demo.py
+git clone https://github.com/RyoichiNakai/WeatherForecastBot_Flask
 ```
  
-# Note
- 
-注意点などがあれば書く
+# Heroku Deploy
+How to deploy to Heroku. 
+
+```bash
+$ heroku login
+$ git add .
+$ git commit -m "new commit"
+$ git push heroku master
+```
  
 # Author
+
+* Name: Ryoichi Nakai
+* E-mail: elmobasketball0913@me.com
  
-作成情報を列挙する
- 
-* 作成者
-* 所属
-* E-mail
- 
-# License
-ライセンスを明示する
- 
-"hoge" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
- 
-社内向けなら社外秘であることを明示してる
- 
-"hoge" is Confidential.
+
