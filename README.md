@@ -4,13 +4,8 @@ This shows whether forecast in 5days.
 # DEMO
 <img width="379" alt="Demo" src="https://user-images.githubusercontent.com/49640294/79834945-d9537c80-83e8-11ea-84c5-25e6446afc42.png">
  
-# Features
- 
-"hoge"のセールスポイントや差別化などを説明する
- 
 # Requirement
- 
-"hoge"を動かすのに必要なライブラリなどを列挙する
+Refer to requirement.txt.
  
 * huga 3.5.2
 * hogehuga 1.0.2
