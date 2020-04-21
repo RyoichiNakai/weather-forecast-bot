@@ -3,8 +3,8 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage
 import os
-from getweathedata import GetWeatherData
-from geogetter import GetCoordinate
+from api.getweathedata import GetWeatherData
+from api.geogetter import GetCoordinate
 
 app = Flask(__name__)
 
