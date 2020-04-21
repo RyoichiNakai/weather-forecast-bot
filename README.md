@@ -5,17 +5,19 @@ This shows whether forecast in 5days.
 <img width="379" alt="Demo" src="https://user-images.githubusercontent.com/49640294/79834945-d9537c80-83e8-11ea-84c5-25e6446afc42.png">
  
 # Requirement
-Refer to requirement.txt.
+Refer to requirements.txt.
  
-* huga 3.5.2
-* hogehuga 1.0.2
+* Flask==1.1.1
+* line-bot-sdk==1.14.0
+* pytz==2019.3
+* beautifulsoup4==4.8.1
  
 # Installation
  
-Requirementで列挙したライブラリなどのインストール方法を説明する
- 
 ```bash
-pip install huga_package
+pip install flask
+pip install line-bot-sdk
+
 ```
  
 # Usage
