@@ -2,8 +2,7 @@
 This shows whether forecast in 5days.
 
 # DEMO
- 
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
+<img width="379" alt="Demo" src="https://user-images.githubusercontent.com/49640294/79834945-d9537c80-83e8-11ea-84c5-25e6446afc42.png">
  
 # Features
  
