@@ -68,12 +68,3 @@ class GetWeatherData:
         reply_text = ('{}の天気は\n'.format(self.input_text) + '\n'.join(result))
 
         return reply_text
-
-
-if __name__ == "__main__":
-    input_text = '大阪堺市北区'
-    lat = 0
-    lon = 0
-    r = GetWeatherData(input_text, lat, lon)
-    reply = r.show_weatherData()
-    print(reply)
